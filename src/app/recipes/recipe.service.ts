@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { Recipe } from "./recipe.model";
 import { Ingredient } from "../shared/ingredient.model";
-import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { ShoppingListService } from "../shopping-list/shopping-list.service";
 
 @Injectable()
 export class RecipeService {
@@ -21,15 +21,17 @@ export class RecipeService {
     )
   ];
 
-  constructor( private slService: ShoppingListService){
-
-  }
+  constructor(private slService: ShoppingListService) {}
   getRecipes() {
     // use slice to get newArray of recipe, since array is referrenced typed
     return this.recipes.slice();
   }
 
-  addIngredientsToShoppingList (ingredients: Ingredient[]){
-   this.slService.addIngredients(ingredients);
+  addIngredientsToShoppingList(ingredients: Ingredient[]) {
+    this.slService.addIngredients(ingredients);
+  }
+
+  getRecipe(index: number) {
+    return this.recipes[index];
   }
 }
