@@ -9,14 +9,14 @@ import { RecipeService } from "../recipe.service";
   styleUrls: ["./recipe-edit.component.css"]
 })
 export class RecipeEditComponent implements OnInit {
+  id: number;
+  editMode = false;
+  recipeForm: FormGroup;
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private router: Router
   ) {}
-  id: number;
-  editMode = false;
-  recipeForm: FormGroup;
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -27,12 +27,6 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onSubmit() {
-    // const newRecipe = new Recipe(
-    //   this.recipeForm.value["name"],
-    //   this.recipeForm.value["description"],
-    //   this.recipeForm.value["imagePath"],
-    //   this.recipeForm.value["ingredients"]
-    // );
     if (this.editMode) {
       this.recipeService.updateRecipe(this.id, this.recipeForm.value);
     } else {

@@ -10,24 +10,31 @@ export class RecipeService {
   // recipeSelected = new Subject<Recipe>();
   recipesChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      "A Burger",
-      "A Tasty Burger",
-      "https://i.pinimg.com/474x/b0/62/53/b06253c4792ddefd0b5b06ace973de31--popular-photography-burgers.jpg",
-      [new Ingredient("Meat", 1), new Ingredient("French Fires", 20)]
-    ),
-    new Recipe(
-      "Giant Burger",
-      "Delicious",
-      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/beyond-burger-nutrition-and-ingredients-1569351590.jpg?crop=0.752xw:1.00xh;0.107xw,0&resize=480:*",
-      [new Ingredient("Buns", 2), new Ingredient("Meat", 1)]
-    )
-  ];
-
+  // private recipes: Recipe[] = [
+  //   new Recipe(
+  //     "A Burger",
+  //     "A Tasty Burger",
+  //     "https://i.pinimg.com/474x/b0/62/53/b06253c4792ddefd0b5b06ace973de31--popular-photography-burgers.jpg",
+  //     [new Ingredient("Meat", 1), new Ingredient("French Fires", 20)]
+  //   ),
+  //   new Recipe(
+  //     "Giant Burger",
+  //     "Delicious",
+  //     "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/beyond-burger-nutrition-and-ingredients-1569351590.jpg?crop=0.752xw:1.00xh;0.107xw,0&resize=480:*",
+  //     [new Ingredient("Buns", 2), new Ingredient("Meat", 1)]
+  //   )
+  // ];
+  private recipes: Recipe[] = [];
+  
   constructor(private slService: ShoppingListService) {}
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
   getRecipes() {
-    // use slice to get newArray of recipe, since array is referrenced typed
+    // make a copy of recipes
     return this.recipes.slice();
   }
 
